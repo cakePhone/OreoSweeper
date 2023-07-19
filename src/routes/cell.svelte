@@ -1,7 +1,7 @@
 <script>
 	import { createEventDispatcher } from 'svelte';
 
-  import Icon from '@iconify/svelte';
+	import Icon from '@iconify/svelte';
 
 	const dispatch = createEventDispatcher();
 	export let cell;
@@ -15,12 +15,12 @@
 	class="flex aspect-square items-center justify-center border-4 border-b-slate-700 border-l-slate-500 border-r-slate-700 border-t-slate-500 bg-slate-600"
 	class:open={cell.open}
 	style="--size: {cell.size};"
-	on:click={(e) => {
+	on:click={() => {
 		if (!cell.flagged && !showMines) dispatch('cell-click', { cell: cell });
 	}}
 	on:contextmenu={(e) => {
-		if(!cell.open) cell.flagged = !cell.flagged;
-    if(cell.open && cell.flagged) cell.flagged = false
+		if (!cell.open) cell.flagged = !cell.flagged;
+		if (cell.open && cell.flagged) cell.flagged = false;
 		e.preventDefault();
 	}}
 >
@@ -36,13 +36,13 @@
 		</p>
 	{/if}
 
-  {#if cell.flagged && !showMines}
-    <Icon icon="material-symbols:flag" color="white" width="70%" height="70%" />
-  {/if}
+	{#if cell.flagged && !showMines}
+		<Icon icon="material-symbols:flag" color="white" width="70%" height="70%" />
+	{/if}
 
-  {#if showMines && cell.hasMine}
-    <Icon icon="material-symbols:heart-broken" color="red" width="70%" height="70%"/>
-  {/if}
+	{#if showMines && cell.hasMine}
+		<Icon icon="material-symbols:heart-broken" color="red" width="70%" height="70%" />
+	{/if}
 </div>
 
 <style lang="postcss">

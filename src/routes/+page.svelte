@@ -1,8 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
-  import { writable } from 'svelte/store'
 	import Cell from './cell.svelte';
-  
 
 	let game = {
 		size: 15,
@@ -61,7 +59,7 @@
 		}
 	}
 
-	function adjacentCells(x, y, ) {
+	function adjacentCells(x, y) {
 		const adjacentCoordinates = [
 			{ x: x - 1, y }, // Left
 			{ x: x + 1, y }, // Right
