@@ -5,7 +5,7 @@
 	let game = {
 		size: 15,
 		totalFreeCells: 0,
-		difficulty: 3,
+		difficulty: 2,
 		showMines: false,
 		field: []
 	};
@@ -155,48 +155,66 @@
 	$: game.field = firstClick ? generateField(game) : game.field;
 </script>
 
-<div class="flex h-screen w-screen flex-shrink-0 flex-col items-center">
-	<div class="mt-10">
+<div
+	class="box-border flex h-screen w-full flex-grow flex-col p-5
+        lg:flex-row lg:justify-center"
+>
+	<div
+		class="flex w-full flex-shrink-0 flex-col
+          lg:h-full lg:w-fit lg:pr-10"
+	>
 		{#if firstClick}
-			<label for="size" class="ml-10 w-fit text-2xl text-slate-100">Size of field</label>
-			<input id="size" type="number" bind:value={game.size} max="25" min="10" />
-
-			<label for="difficulty" class="ml-10 w-fit text-2xl text-slate-100">Difficulty</label>
-			<select
-				id="difficulty"
-				on:change={(e) => {
-					game.difficulty = e.target.value;
-				}}
-			>
-				<option value="1">Easy</option>
-				<option selected value="2">Normal</option>
-				<option value="3">Hard</option>
-			</select>
+			<div class="inline-flex h-fit w-full space-x-2 py-2">
+				<label for="size" class="w-fit text-xl text-slate-100">Size of field</label>
+				<input id="size" type="number" bind:value={game.size} max="25" min="10" />
+			</div>
+			<div class="inline-flex h-fit w-full space-x-2 py-2">
+				<label for="difficulty" class="w-fit text-xl text-slate-100">Difficulty</label>
+				<select
+					id="difficulty"
+					on:change={(e) => {
+						game.difficulty = e.target.value;
+					}}
+				>
+					<option value="1">Easy</option>
+					<option selected value="2">Normal</option>
+					<option value="3">Hard</option>
+				</select>
+			</div>
 		{:else}
-			<label for="size" class="ml-10 w-fit text-2xl text-slate-100">Size of field</label>
-			<input id="size" type="number" disabled value={game.size} max="25" min="10" />
-
-			<label for="difficulty" class="ml-10 w-fit text-2xl text-slate-100">Difficulty</label>
-			<select
-				disabled
-				id="difficulty"
-				value={game.difficulty}
-				on:change={(e) => {
-					game.difficulty = e.target.value;
-				}}
-			>
-				<option value="1">Easy</option>
-				<option selected value="2">Normal</option>
-				<option value="3">Hard</option>
-			</select>
+			<div class="inline-flex h-fit w-full space-x-2 py-2">
+				<label for="size" class="w-fit text-xl text-slate-100">Size of field</label>
+				<input id="size" type="number" disabled value={game.size} max="25" min="10" />
+			</div>
+			<div class="inline-flex h-fit w-full space-x-2 py-2">
+				<label for="difficulty" class="w-fit text-xl text-slate-100">Difficulty</label>
+				<select
+					disabled
+					id="difficulty"
+					value={game.difficulty}
+					on:change={(e) => {
+						game.difficulty = e.target.value;
+					}}
+				>
+					<option value="1">Easy</option>
+					<option selected value="2">Normal</option>
+					<option value="3">Hard</option>
+				</select>
+			</div>
 		{/if}
 		<button
-			class="mx-5 rounded-full bg-slate-600 px-6 py-3 text-slate-100 transition-all hover:bg-red-600 hover:text-red-200"
+			class="h-fit w-fit rounded-full bg-slate-600 px-6 py-3 text-slate-100 transition-all hover:bg-red-600 hover:text-red-200
+             lg:w-full"
 			on:click={() => reset()}
 			>Reset
 		</button>
 	</div>
-	<div class="mt-10 grid aspect-square h-5/6" id="grid" style="--size: {game.size}">
+	<div
+		class="mt-5 box-border grid aspect-square
+           lg:mt-0 lg:h-[90%] lg:w-fit"
+		id="grid"
+		style="--size: {game.size}"
+	>
 		{#each game.field as row}
 			{#each row as cell}
 				<Cell
@@ -211,8 +229,9 @@
 
 <style>
 	#grid {
-		grid-template-rows: repeat(var(--size), 1fr);
+		grid-template-rows: repeat(var(--size), calc(100% / var(--size)));
 		grid-template-columns: repeat(var(--size), 1fr);
 		gap: 2px;
+		max-width: calc(100% - 28px);
 	}
 </style>

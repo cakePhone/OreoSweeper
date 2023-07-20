@@ -1,0 +1,1 @@
+.open.svelte-s62msl{border:none}.number.svelte-s62msl{font-size:70%}#grid.svelte-17c4rlh{grid-template-rows:repeat(var(--size),calc(100% / var(--size)));grid-template-columns:repeat(var(--size),1fr);gap:2px;max-width:calc(100% - 28px)}
