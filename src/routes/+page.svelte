@@ -125,8 +125,10 @@
 		}
 
 		if (freeMines <= 1) {
-			window.alert('You won');
 			game.showMines = true;
+			setTimeout(() => {
+				window.alert('You won');
+			}, 10);
 		}
 	}
 
@@ -178,6 +180,7 @@
 			<select
 				disabled
 				id="difficulty"
+				value={game.difficulty}
 				on:change={(e) => {
 					game.difficulty = e.target.value;
 				}}

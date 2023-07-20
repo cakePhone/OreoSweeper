@@ -27,7 +27,7 @@
 	<!-- ({cell.x},{cell.y}) -->
 	{#if cell.showNumber && !cell.flagged}
 		<p
-			class="text-s text-center font-bold"
+			class="text-s select-none text-center font-bold"
 			class:text-red-300={cell.nearbyMines >= 3}
 			class:text-orange-300={cell.nearbyMines === 2}
 			class:text-green-300={cell.nearbyMines === 1}
